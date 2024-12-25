@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../Style/Header.css";
+import "../styles/Header.css";
 import { Link } from "react-router";
 import { TfiReddit,TfiCar,TfiMobile,TfiWorld } from "react-icons/tfi";
 
@@ -117,8 +117,11 @@ const Header = () => {
         </li>
 
         <li className='nav-item dropdown'>
+
+
+
           <span
-            className='nav-Link'
+            className='aboutus-nav-Link'
             onMouseEnter={() => setIsAbout(true)}
             onMouseLeave={() => setIsAbout(false)}
           >
@@ -127,18 +130,61 @@ const Header = () => {
               {isAbout ? "▲" : "▼"}
             </span>
             <nav className={`subAbout ${isAbout ? "show" : ""}`}>
-              <ul className='subAbout-items'>
-                <li className='subAbout-item'>
-                  <Link className='subAbout-Link'>Technology</Link>
-                </li>
-                <li className='subAbout-item'>
-                  <Link className='subAbout-Link'>Mobile Technology</Link>
-                </li>
-                <li className='subAbout-item'>
-                  <Link className='subAbout-Link'>Electric Car Event</Link>
-                </li>
-              </ul>
+              <div className="Aboutus">
+                <ul className='subAbout-items'>
+                  <li className='subAbout-title'>
+                    <strong>Learn more</strong>
+                  </li>
+                  <li className='subAbout-item'>
+                    <Link className='subAbout-Link'>
+                    About us
+                    <p>Creating powerful experiences for the people you bring together</p>
+                    </Link>
+                  </li>
+                  <li className='subAbout-item'>
+                    <Link className='subAbout-Link'>
+                    Our Mission & Culture
+                    <p>Learn what innovatex's culture stands for.</p>
+                    </Link>
+                  </li>
+                  <li className='subAbout-item'>
+                    <Link className='subAbout-Link'>
+                      Partners
+                      <p>
+                        Let's bring people together ... together!
+                      </p>
+                    </Link>
+                    </li>
+                  <li className='subAbout-item'>
+                    <Link className='subAbout-Link'>
+                    Careers
+                    <p>
+                      Come work somewhere that doesn't feel so work-y!
+                    </p>
+                    </Link>
+                  </li>
+                </ul>
+                <div className="Aboutus-img-learnmore">
+                  <img
+                    width={200}
+                    height={150}
+                    src="aboutus-img.png" 
+                    alt="Aboutus-img"
+                    className="Aboutus-img"
+                    />
+                    <div>
+                      <strong>Bringing People Together</strong>
+                      <p>
+                      CEO Chris Sykes on how Swoogo's people-focused culture is the driving force behind its continued growth.
+                      </p>
+                      <Link  className="learn-more">Learn more →</Link>
+                    </div>
+                  </div>
+              </div>
             </nav>
+
+
+            
           </span>
         </li>
       </ul>
