@@ -320,11 +320,11 @@ font-weight: 400;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background: #fff; /* يمكنك تخصيص اللون حسب الحاجة */
+    background: #fff; 
   }
 
   .nav-items {
-    display: none; /* إخفاء العناصر عند الشاشات الصغيرة */
+    display: none; 
     flex-direction: column;
     position: absolute;
     top: 60px;
@@ -335,22 +335,22 @@ font-weight: 400;
   }
 
   .nav-items.show {
-    display: flex; /* إظهار القائمة عندما يكون هناك تفاعل مع الأيقونة */
+    display: flex; 
   }
 
   .nav-item {
-    margin: 10px 0; /* إضافة المسافة بين العناصر في القائمة */
+    margin: 10px 0; 
   }
 
   .navicon {
-    display: block; /* جعل الأيقونة ظاهرة */
+    display: block; 
   }
 
 }
 
-/* عند الضغط على الأيقونة، تظهر القائمة المنسدلة */
+
 @media (max-width: 768px) {
   .navicon.open + .nav-items {
-    display: flex; /* عرض القائمة عند التفاعل مع الأيقونة */
+    display: flex; 
   }
 }
