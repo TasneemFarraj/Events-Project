@@ -1,32 +1,39 @@
 import React, { useState } from "react";
-import "../Style/Header.css";
+import "../styles/Header.css";
 import { Link } from "react-router";
 import { TfiReddit, TfiCar, TfiMobile, TfiWorld } from "react-icons/tfi";
-import eventLogo from "./eventLogo.png";
+
+import aboutusImg from "../Assets/aboutus-img.png"
+
+
 const Header = () => {
   const [isShown, setIsShown] = useState(false);
   const [isAbout, setIsAbout] = useState(false);
   const [isCountryShown, setIsCountryShown] = useState(false);
   const [isDropdownLocked, setIsDropdownLocked] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState("Country");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState("Country");
+
+  const [isShownHamburger , setIsShownHamburger] = useState(false);
+  const [isAboutHamburger , setIsAboutHamburger] = useState(false);
+  const [isCountryHamburger, setIsCountryHamburger] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   const handleMouseEnter = () => {
-    if (!isDropdownLocked) {
+    if (!isDropdownLocked && !isMenuOpen) {
       setIsCountryShown(true);
     }
   };
 
   const handleMouseLeave = () => {
-    if (!isDropdownLocked) {
+    if (!isDropdownLocked && !isMenuOpen) {
       setIsCountryShown(false);
     }
   };
 
   const handleClick = () => {
-    setIsDropdownLocked(!isDropdownLocked); // للتبديل بين الإظهار والإخفاء عند النقر
-    setIsCountryShown(!isDropdownLocked); // عرض القائمة عند النقر إذا كانت مخفية
+    setIsCountryHamburger(!isCountryHamburger);
   };
 
   const handleCountrySelect = (country) => {
@@ -35,13 +42,45 @@ const Header = () => {
     setIsCountryShown(false);
   };
 
+
+  // EventType
+  const handleMouseEnterEventType = () => {
+    if (!isMenuOpen) {
+      setIsShown(true);
+    }};
+
+  const handleMouseLeaveEventType = () => {
+    if (!isMenuOpen) {
+      setIsShown(false);
+    }};
+  
+  const handleClickEventType = () => {
+    setIsShownHamburger(!isShownHamburger);
+  };
+
+
+    // AboutUs
+    const handleMouseEnterAboutUs = () => {
+      if (!isMenuOpen) {
+      setIsAbout(true);
+    }};
+    
+    const handleMouseLeaveAboutUs = () => {
+      if (!isMenuOpen) {
+      setIsAbout(false);
+    }};
+    
+    const handleClickAboutUs = () => {
+      setIsAboutHamburger(!isAboutHamburger);
+    };
+
   return (
     <nav className='nav'>
       <button className="navicon" onClick={toggleMenu}>
         ☰
       </button>
       <div className='logo'>
-        <img src={eventLogo} alt='Logo' className='logo-img' />
+        <img src="eventLogo.png" alt='Logo' className='logo-img' />
       </div>
 
       <ul className={`nav-items ${isMenuOpen ? "show" : ""}`}>
@@ -52,12 +91,12 @@ const Header = () => {
             onMouseLeave={handleMouseLeave}
             onClick={handleClick}
           >
-            {selectedCountry}
-            <span className='arrow' style={{ fontSize: "10px" }}>
+            <span className="nav-Link-name">{selectedCountry}</span>
+            <span className='arrow ' style={{ fontSize: "10px" }}>
               {isCountryShown ? "▲" : "▼"}
             </span>
-          </span>
-          <nav className={`subCou ${isCountryShown ? "show" : ""}`}>
+          
+          <nav className={`subCou ${isCountryShown ? "show" : ""} ${isMenuOpen && isCountryHamburger ? "m" : ""}`}>
             <ul className='subCou-items'>
               <li
                 className='subCou-item'
@@ -158,20 +197,21 @@ const Header = () => {
               </li>
             </ul>
           </nav>
+          </span>
         </li>
 
         <li className='nav-item dropdown'>
-          <span
-            className='nav-Link'
-            onMouseEnter={() => setIsShown(true)}
-            onMouseLeave={() => setIsShown(false)}
-            onClick={() => setIsShown(true)}
-          >
-            Event Type
+        <span
+          className="nav-Link"
+          onMouseEnter={handleMouseEnterEventType}
+          onMouseLeave={handleMouseLeaveEventType}
+          onClick={handleClickEventType}
+        >
+            <span className="nav-Link-name">Event Type</span>
             <span className='arrow' style={{ fontSize: "10px" }}>
-              {isShown ? "▲" : "▼"}
+              {isShown ||isShownHamburger ? "▲" : "▼"}
             </span>
-            <nav className={`submenu ${isShown ? "show" : ""}`}>
+            <nav className={`submenu ${isShown  ? "show" : ""} ${isMenuOpen && isShownHamburger ? "m" : ""}`}>
               <ul className='submenu-items'>
                 <li className='submenu-item'>
                   <TfiWorld size={18} />
@@ -211,12 +251,13 @@ const Header = () => {
         <li className='nav-item dropdown'>
           <span
             className='nav-Link'
-            onMouseEnter={() => setIsAbout(true)}
-            onMouseLeave={() => setIsAbout(false)}
+            onMouseEnter={handleMouseEnterAboutUs}
+            onMouseLeave={handleMouseLeaveAboutUs}
+            onClick={handleClickAboutUs}
           >
-            About us
-            <span className='arrow'>{isAbout ? "▲" : "▼"}</span>
-            <nav className={`subAbout ${isAbout ? "show" : ""}`}>
+            <span className="nav-Link-name">About Us</span>
+            <span className='arrow'>{isAbout || isAboutHamburger ? "▲" : "▼"}</span>
+            <nav className={`subAbout ${isAbout ? "show" : ""} ${isMenuOpen && isAboutHamburger ? "m" : ""}`}>
               <div className='Aboutus'>
                 <ul className='subAbout-items'>
                   <li className='subAbout-title'>
@@ -254,7 +295,7 @@ const Header = () => {
                   <img
                     width={200}
                     height={150}
-                    src='About.jpg'
+                    src={aboutusImg}
                     alt='Aboutus-img'
                     className='Aboutus-img'
                   />
